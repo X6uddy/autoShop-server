@@ -6,6 +6,7 @@ const MailService = require('./mail-service');
 const UserDto = require('../dtos/user-dto');
 const TokenService = require('./token-service');
 const ApiError = require('../exeptions/api-error');
+const DetailService = require('../service/detail-service');
 
 class UserService {
     async registration(email, password) {
@@ -19,6 +20,8 @@ class UserService {
         const userId = uuid.v4();
         const user = await UserModel.create({userId, email, password:hashPassword, activationLink, roles: ["USER"]});
         await MailService.sendActivationMail(email, `${process.env.API_URL}/api/activate/${activationLink}`);
+
+        await RoleModel.create({email, roles: ["USER"]});
 
         const userDto = new UserDto(user); //id email isActivated roles
         const tokens = TokenService.generateTokens({...userDto});
@@ -81,6 +84,11 @@ class UserService {
         const users = UserModel.find();
         return users;
     }
-}
+
+    async makeNewOrder (details) {
+        const res = await DetailService.getAllAutoparts();
+        return res;
+    }
+} 
 
 module.exports = new UserService();
