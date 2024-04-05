@@ -69,6 +69,16 @@ class UserController {
             console.log(e)
         }
     }
+
+    async makeInOrder(req, res, next) {
+        try {
+            const details = req.body;
+            const order = await UserService.makeNewOrder();
+            return res.json(order);
+        } catch (e) {
+            console.log(e)
+        }
+    }
 }
 
 module.exports = new UserController();
