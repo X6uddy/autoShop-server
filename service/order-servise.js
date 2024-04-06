@@ -7,7 +7,7 @@ class OrderServise {
         return orders;
     }
     async getOrdersById (clientId) {
-        const orders = OrderModel.findById({detailId});
+        const orders = OrderModel.findById({clientId});
         return orders;
     }
     async makeNewOrder (details, login) {
