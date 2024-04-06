@@ -1,7 +1,6 @@
 const {Schema, model} = require('mongoose');
 
 const AutopartSchema = new Schema({
-    detailId: {type: String, required: true},
     title: {type: String, required: true},
     imageUrl: {type: String, required: true},
     quantitOnHand: {type: Number, required: true},
