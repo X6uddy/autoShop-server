@@ -84,11 +84,6 @@ class UserService {
         const users = UserModel.find();
         return users;
     }
-
-    async makeNewOrder (details) {
-        const res = await DetailService.getAllAutoparts();
-        return res;
-    }
 } 
 
 module.exports = new UserService();
