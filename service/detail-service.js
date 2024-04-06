@@ -9,6 +9,10 @@ class DetailService {
         const details = AutopartModel.findById({detailId});
         return details;
     }
+    async createNewAutopart (newAutopart) {
+        const newDetail = AutopartModel.create(...newAutopart);
+        return newDetail;
+    }
 }
 
 module.exports = new DetailService();
