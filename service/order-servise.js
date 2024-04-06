@@ -13,11 +13,7 @@ class OrderServise {
     async makeNewOrder (details, login) {
         const orderTime = new Date();
         const order = await OrderModel.create({email: login, purchasedAutoParts: details, orderTime});
-
-
-
-
-        return res;
+        return order;
     }
 }
 
