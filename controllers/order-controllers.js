@@ -1,13 +1,11 @@
-const UserService = require('../service/user-service');
-const {validationResult} = require('express-validator');
-const ApiError = require('../exeptions/api-error');
-const OrderServise = require('../service/order-servise');
+const UserModel = require('../models/user-model');
+const OrderService = require('../service/order-service');
 
 class OrderController {
     async makeNewOrder(req, res, next) {
         try {
-            const {details, login} = req.body;
-            const order = await OrderServise.makeNewOrder(details, login);
+            const {purchasedAutoParts, userId} = req.body;
+            const order = await OrderService.makeNewOrder(purchasedAutoParts, userId);
             return res.json(order);
         } catch (e) {
             next(e)
@@ -15,7 +13,7 @@ class OrderController {
     }
     async getAllOrders(req, res, next) {
         try {
-            const orders = await OrderServise.getAllOrders()
+            const orders = await OrderService.getAllOrders()
             return res.json(orders)
         } catch (e) {
             next(e)
@@ -23,8 +21,8 @@ class OrderController {
     }
     async getOrdersById(req, res, next) {
         try {
-            const {login} = req.body;
-            const orders = await OrderServise.getOrdersById(login)
+            const {userId} = req.body;
+            const orders = await OrderService.getOrdersById(userId)
             return res.json(orders)
         } catch (e) {
             next(e)
