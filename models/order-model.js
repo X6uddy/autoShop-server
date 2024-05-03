@@ -1,9 +1,11 @@
 const {Schema, model} = require('mongoose');
 
 const OrderSchema = new Schema({
-    email: {type: String, required: true},
+    userId: {type: String, required: true, ref: 'User'},
+    orderId: {type: String, required: true},
     purchasedAutoParts: [{type: String, ref: 'Autopart'}],
-    orderTime: {type: Date, default: Date.now}
+    orderTime: {type: String, default: Date.now},
+    status: {type: String, default: 'not confirmed'}
 })
 
 module.exports = model('Order', OrderSchema);
