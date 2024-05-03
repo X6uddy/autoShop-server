@@ -3,6 +3,8 @@ const {body} = require('express-validator');
 const UserController = require('../controllers/user-controller');
 const authMiddleware = require('../middlewares/auth-middleware');
 const roleMiddleware = require('../middlewares/role-middleware');
+const OrderController = require('../controllers/order-controllers');
+const AutopartController = require('../controllers/autopart-controller')
 
 const router = new Router();
 
@@ -14,6 +16,12 @@ router.post('/login', UserController.login);
 router.post('/logout', UserController.logout);
 router.get('/activate/:link', UserController.activate);
 router.get('/refresh', UserController.refresh);
-router.get('/users', authMiddleware, roleMiddleware(['ADMIN']), UserController.users);
+router.get('/users', authMiddleware, roleMiddleware(['USER']), UserController.users);
+router.get('/orders', OrderController.getAllOrders);
+router.post('/orders/new', OrderController.makeNewOrder);
+router.post('/orders/:id', OrderController.getOrdersById);
+router.post('/autoparts/new', AutopartController.createNewAutopart);
+router.post('/autoparts/:id', AutopartController.getAutopartById);
+router.get('/autoparts', AutopartController.getAllAutoparts);
 
 module.exports = router;
