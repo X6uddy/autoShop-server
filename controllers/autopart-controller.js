@@ -14,7 +14,9 @@ class AutopartController {
     async getAutopartById(req, res, next) {
         try {
             const {autopartId} = req.body;
+            console.log(autopartId)
             const autopart = await AutopartService.getAutopartById(autopartId);
+            console.log(autopart)
             return res.json(autopart)
         } catch (e) {
             next(e)

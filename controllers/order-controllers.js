@@ -28,6 +28,16 @@ class OrderController {
             next(e)
         }
     }
+    async statusСhange(req, res, next) {
+        try {
+            const {orderId, newStatus} = req.body;
+            const order = await OrderService.statusСhange(orderId, newStatus)
+            return res.json(order)
+        } catch (e) {
+            next(e)
+        }
+    }
+
 }
 
 module.exports = new OrderController();
