@@ -19,6 +19,12 @@ class OrderService {
         const order = await OrderModel.create({orderId, userId, purchasedAutoParts, orderTime});
         return order
     }
+
+    async statusСhange (orderId, newStatus) {
+        const newOrder = OrderModel.find({orderId}).updateOne({status: newStatus})
+        console.log(newOrder)
+        return newOrder;
+    }
 }
 
 module.exports = new OrderService();
