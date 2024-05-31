@@ -9,7 +9,11 @@ class OrderService {
         return orders;
     }
     async getOrdersById (userId) {
-        const orders = OrderModel.find({userId});
+        const clientId = await UserModel.findOne({ userId })
+        const newId = clientId._id.toString();
+
+        console.log('new Id', newId, '\n\n\n\n\n\n')
+        const orders = OrderModel.find({userId: newId});
         return orders
     }
     async makeNewOrder (purchasedAutoParts, userId) {
